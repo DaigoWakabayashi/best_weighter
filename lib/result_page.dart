@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import 'bottom_button.dart';
@@ -7,19 +6,17 @@ import 'constants.dart';
 import 'reusable_card.dart';
 
 class ResultsPage extends StatelessWidget {
+  ResultsPage({
+    @required this.bestWeightResult,
+  });
 
-  ResultsPage(
-      {@required this.interpretation, @required this.bmiResult, @required this.resultText,});
-
-  final String bmiResult;
-  final String resultText;
-  final String interpretation;
+  final String bestWeightResult;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('BMI CALCULATOR'),
+        title: Text('適正体重'),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -30,38 +27,34 @@ class ResultsPage extends StatelessWidget {
               padding: EdgeInsets.all(15),
               alignment: Alignment.bottomLeft,
               child: Text(
-                'Your Result',
-                style: TitleTextStyle,
+                '適正体重は',
+                style: bodyTextStyle,
+
               ),
             ),
           ),
           Expanded(
-            flex: 5,
             child: ReusableCard(
               colour: activeCardColour,
-              cardChild: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    resultText.toUpperCase(),
-                    style: resultTextStyle,
+              cardChild: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.baseline,
+                textBaseline: TextBaseline.alphabetic,
+                    children: [
+                      Text(
+                        bestWeightResult,
+                        style: BestWeightTextStyle,
+                      ),
+                      Text(
+                        'kg',
+                        style: labelTextStyle,
+                      )
+                    ],
                   ),
-                  Text(
-                    bmiResult,
-                    style: BMITextStyle,
-                  ),
-                  Text(
-                    interpretation,
-                    textAlign: TextAlign.center,
-                    style: bodyTextStyle,
-                  ),
-                ],
               ),
             ),
-          ),
           BottomButton(
-            buttonTitle: 'RE-CALCULATE',
+            buttonTitle: '入力画面に戻る',
             onTap: () {
               Navigator.pop(context);
             },

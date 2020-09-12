@@ -31,7 +31,7 @@ const resultTextStyle = TextStyle(
   fontWeight: FontWeight.bold,
 );
 
-const BMITextStyle = TextStyle(
+const BestWeightTextStyle = TextStyle(
   fontSize: 100,
   fontWeight: FontWeight.bold,
 

@@ -1,35 +1,16 @@
 import 'dart:math';
 
-class CalculatorBrain {
-  CalculatorBrain({this.height, this.weight});
+class Calculator {
+  Calculator({this.height, this.bestweight});
 
   final int height;
-  final int weight;
+  final int bestweight;
 
-  double _bmi;
+  double _bestweight;
 
-  String calculateBMI() {
-    _bmi = weight / pow(height / 100, 2);
-    return _bmi.toStringAsFixed(1);
+  String calculateBestWeight() {
+    _bestweight = pow(height / 100, 2) * 22;
+    return _bestweight.toStringAsFixed(1);
   }
 
-  String getResult() {
-    if (_bmi >= 25) {
-      return 'Overweight';
-    } else if (_bmi > 18.5) {
-      return 'normal';
-    } else {
-      return 'Underweight';
-    }
   }
-
-  String getInterpretation (){
-    if (_bmi >= 25) {
-      return 'ちょっと太り気味 \n 運動しましょう';
-    } else if (_bmi > 18.5) {
-      return '適正数値内です\nこのままキープしましょう';
-    } else {
-      return 'ちょっと痩せ気味\nいっぱい食べよう';
-    }
-  }
-}

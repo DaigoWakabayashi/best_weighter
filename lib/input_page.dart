@@ -1,18 +1,15 @@
-
-
-
 import 'dart:ui';
-
 import 'package:best_weighter/reusable_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import 'bottom_button.dart';
 import 'calculate.dart';
 import 'constants.dart';
 import 'icon_content.dart';
 import 'result_page.dart';
 import 'round_icon.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 
 const bottomContainerHeight = 80.0;
 const activeCardColour = Color(0xFF1D1E33);
@@ -39,7 +36,7 @@ class _InputPageState extends State<InputPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Best Weighter'),
+          title: Text('適正体重'),
         ),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -58,8 +55,8 @@ class _InputPageState extends State<InputPage> {
                           ? activeCardColour
                           : inactiveCardColour,
                       cardChild: IconContent(
-                        // icon: FontAwesomeIcons.mars,
-                        label: 'MALE',
+                        icon: FontAwesomeIcons.mars,
+                        label: '男性',
                       ),
                     ),
                   ),
@@ -74,8 +71,8 @@ class _InputPageState extends State<InputPage> {
                           ? activeCardColour
                           : inactiveCardColour,
                       cardChild: IconContent(
-                        // icon: FontAwesomeIcons.venus,
-                        label: 'FEMALE',
+                        icon: FontAwesomeIcons.venus,
+                        label: '女性',
                       ),
                     ),
                   ),
@@ -89,7 +86,7 @@ class _InputPageState extends State<InputPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(
-                      'HEIGHT',
+                      '身長',
                       style: labelTextStyle,
                     ),
                     Row(
@@ -114,9 +111,9 @@ class _InputPageState extends State<InputPage> {
                         thumbColor: Color(0xFFEB1555),
                         overlayColor: Color(0xFFEB1555),
                         thumbShape:
-                        RoundSliderThumbShape(enabledThumbRadius: 15),
+                            RoundSliderThumbShape(enabledThumbRadius: 15),
                         overlayShape:
-                        RoundSliderOverlayShape(overlayRadius: 20),
+                            RoundSliderOverlayShape(overlayRadius: 20),
                       ),
                       child: Slider(
                         value: height.toDouble(),
@@ -133,109 +130,20 @@ class _InputPageState extends State<InputPage> {
                 ),
               ),
             ),
-            Expanded(
-                child: Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: ReusableCard(
-                        colour: activeCardColour,
-                        cardChild: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'WEIGHT',
-                              style: labelTextStyle,
-                            ),
-                            Text(
-                              weight.toString(),
-                              style: mathTextStyle,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                RoundIconButton(
-                                  // icon: FontAwesomeIcons.minus,
-                                  onPressed: () {
-                                    setState(() {
-                                      weight--;
-                                    });
-                                  },
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                RoundIconButton(
-                                  // icon: FontAwesomeIcons.plus,
-                                  onPressed: () {
-                                    setState(() {
-                                      weight++;
-                                    });
-                                  },
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: ReusableCard(
-                        colour: activeCardColour,
-                        cardChild: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'AGE',
-                              style: labelTextStyle,
-                            ),
-                            Text(
-                              age.toString(),
-                              style: mathTextStyle,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                RoundIconButton(
-                                  // icon: FontAwesomeIcons.minus,
-                                  onPressed: () {
-                                    setState(() {
-                                      age--;
-                                    });
-                                  },
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                RoundIconButton(
-                                  // icon: FontAwesomeIcons.plus,
-                                  onPressed: () {
-                                    setState(() {
-                                      age++;
-                                    });
-                                  },
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                )),
             BottomButton(
-              buttonTitle: 'CALCULATE',
+              buttonTitle: '算出する',
               onTap: () {
-                CalculatorBrain calc = CalculatorBrain(height: height, weight: weight);
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ResultsPage(
-                      bmiResult: calc.calculateBMI(),
-                      resultText: calc.getResult(),
-                      interpretation: calc.getInterpretation(),
-                    )));
+                Calculator calc =
+                    Calculator(height: height, bestweight: weight);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ResultsPage(
+                              bestWeightResult: calc.calculateBestWeight(),
+                            )));
               },
             ),
           ],
         ));
   }
 }
-
