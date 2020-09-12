@@ -1,6 +1,6 @@
 # best_weighter
 
-A new Flutter application.
+身長から適正体重を算出するアプリ
 
 ## Getting Started
 
